@@ -1,33 +1,42 @@
-#include<stdio.h>
+#include <math.h>
+#include <stdio.h>
 #include<string.h>
-int cnt[26];
+#include<ctype.h>
+void insertionSort(char arr[], int n){
+	int i, tmp, j;
+	for (i = 1; i < n; i++) {
+		tmp = (int)arr[i];
+		j = i - 1;
+		while (j >= 0 && (int)arr[j] > tmp) {
+			arr[j + 1] = arr[j];
+			j = j - 1;
+		}
+		arr[j + 1] = tmp;
+	}
+}
 int main(){
-    char input[1001];
-    scanf("%[^\n]*c",input);
-    int l=strlen(input);
-
-    for(int i=0;i<l;i++){
-        int convert = (int) input[i];
-        
-        if(input[i]>='A'&&input[i]<='Z'){
-            for(int j='A';j<='Z';j++){
-                if(convert == j){
-                    cnt[convert-65]++;
-                    break;
-                }
-            }
-        }else if(input[i]>='a'&&input[i]<='z'){
-            for(int j='a';j<='z';j++){
-                if(convert == j){
-                    cnt[convert-97]++;
-                    break;
-                }
-            }
+	char input[101];
+    scanf("%[^\n]*c", input);
+    for(int i=0;i<strlen(input);i++){
+        input[i] = toupper(input[i]);
+    }
+	insertionSort(input, strlen(input));
+    int currentAlpha = 'A';
+    int tmpAlpha = input[0];
+    int idx=0;
+    int cnt=0;
+    while(currentAlpha <= 'Z'){
+       if(currentAlpha == tmpAlpha){
+         while(currentAlpha==tmpAlpha){
+            tmpAlpha = input[++idx];
+            ++cnt;
         }
+                printf("%c : %d\n", currentAlpha++, cnt);
+            cnt=0;
+       }
+       else{
+             printf("%c : %d\n", currentAlpha++, 0);
+       }
     }
-
-    for(int i=0;i<26;i++){
-        printf("%c : %d\n",i+65,cnt[i]);
-    }
-    return 0;
+	return 0;
 }
