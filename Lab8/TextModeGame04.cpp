@@ -58,12 +58,40 @@ void init_star()
 }
 void checkCollision() {
 	for (int i = 0; i < scount; i++) {
-		if ((star[i].X==tmpPosX||star[i].X==tmpPosX-2||star[i].X==tmpPosX-1|| 
-			star[i].X==tmpPosX+2||star[i].X==tmpPosX+1)&&star[i].Y==tmpPosY)
+		//if ((star[i].X==tmpPosX||star[i].X==tmpPosX-2||star[i].X==tmpPosX-1|| 
+		//	star[i].X==tmpPosX+2||star[i].X==tmpPosX+1)&&star[i].Y==tmpPosY)
+		if (star[i].X == tmpPosX - 2 && star[i].Y == tmpPosY) {
+			short tmp = rand() % screen_x;
+			star[i] = { tmp,1 };
 			--hp;
-		if (hp <= 0) {
-			play = false;
+			if (hp <= 0) play = false;
 		}
+		if (star[i].X == tmpPosX - 1 && star[i].Y == tmpPosY) {
+			short tmp = rand() % screen_x;
+			star[i] = { tmp,1 };
+			--hp;
+			if (hp <= 0) play = false;
+		}
+		if (star[i].X == tmpPosX && star[i].Y == tmpPosY) {
+			short tmp = rand() % screen_x;
+			star[i] = { tmp,1 };
+			--hp;
+			if (hp <= 0) play = false;
+		}
+		if (star[i].X == tmpPosX + 1 && star[i].Y == tmpPosY) {
+			short tmp = rand() % screen_x;
+			star[i] = { tmp,1 };
+			--hp;
+			if (hp <= 0) play = false;
+		}
+		if (star[i].X == tmpPosX + 2 && star[i].Y == tmpPosY) {
+			short tmp = rand() % screen_x;
+			star[i] = { tmp,1 };
+			--hp;
+			if (hp <= 0) play = false;
+		}
+
+		
 	}
 }
 void star_fall()
